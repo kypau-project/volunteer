@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +25,7 @@
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-            
+
             {{ $slot }}
 
             <livewire:atom.footer />
@@ -40,5 +39,42 @@
     <script src="{{asset('mazer/assets/extensions/apexcharts/apexcharts.min.js')}}"></script>
     <script src="{{asset('mazer/assets/static/js/pages/dashboard.js')}}"></script>
     @stack('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('swal:toast', (event) => {
+                const {
+                    icon,
+                    title,
+                    timer
+                } = event[0];
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: timer || 3000,
+                    timerProgressBar: true
+                });
+                Toast.fire({
+                    icon,
+                    title
+                });
+            });
+
+            Livewire.on('swal', (event) => {
+                const {
+                    icon,
+                    title,
+                    text
+                } = event[0];
+                Swal.fire({
+                    icon,
+                    title,
+                    text
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

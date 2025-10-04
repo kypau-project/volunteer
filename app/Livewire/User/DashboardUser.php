@@ -12,6 +12,7 @@ class DashboardUser extends Component
     public $laporanPending;
     public $laporanProses;
     public $laporanSelesai;
+    public $laporanPerBulan;
 
     // protected $listeners = [
     //     'laporanCreated' => 'mount',

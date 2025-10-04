@@ -34,8 +34,22 @@ class Login extends Component
             return;
         }
 
+        if ($user->is_blocked) {
+            $this->js(<<<JS
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Akun Diblokir!',
+                    text: 'Akun Anda telah diblokir. Silakan hubungi administrator untuk informasi lebih lanjut.',
+                    confirmButtonText: 'OK'
+                });
+            JS);
+            return;
+        }
+
         if (Auth::attempt([$this->getLoginField($user) => $this->idUser, 'password' => $this->password], $this->remember)) {
             session()->regenerate();
+            // Update last login
+            $user->updateLastLogin();
             return $this->redirectIntended(route('admin.dashboard'), navigate: true);
         }
 

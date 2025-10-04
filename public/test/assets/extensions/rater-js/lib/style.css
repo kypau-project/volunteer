@@ -1,0 +1,9 @@
+.rate-base-layer {
+    color: #ddd;
+}
+.rate-hover-layer {
+    color: orange;
+}
+.rate-select-layer {
+    color: #ffd700;
+}

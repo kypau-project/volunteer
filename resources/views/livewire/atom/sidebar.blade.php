@@ -61,6 +61,24 @@
                             <span>Laporan</span>
                         </a>
                     </li>
+
+                    <li
+                        class="sidebar-item {{ request()->routeIs('admin.list-user') ? 'active' : '' }}">
+                        <a href="{{ route('admin.list-user') }}" class='sidebar-link' wire:navigate>
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">Akun</li>
+
+                    <li
+                        class="sidebar-item {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
+                        <a href="{{ route('admin.profile') }}" wire:navigate class='sidebar-link'>
+                            <i class="bi bi-person"></i>
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                    </li>
                     @endif
 
                     @if(Auth::check() && Auth::user()->role === 'user')
@@ -79,17 +97,17 @@
                             <span>Laporan</span>
                         </a>
                     </li>
-                    @endif
 
                     <li class="sidebar-title">Akun</li>
 
                     <li
-                        class="sidebar-item">
+                        class="sidebar-item {{ request()->routeIs('user.profile') ? 'active' : '' }}">
                         <a href="{{ route('user.profile') }}" wire:navigate class='sidebar-link'>
                             <i class="bi bi-person"></i>
                             <span>{{ Auth::user()->name }}</span>
                         </a>
                     </li>
+                    @endif
 
                     <livewire:auth.logout />
 

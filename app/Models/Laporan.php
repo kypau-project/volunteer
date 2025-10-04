@@ -13,14 +13,24 @@ class Laporan extends Model
         'deskripsi',
         'tanggal',
         'gambar',
-        'status', 
+        'status',
         'respon',
+        'rating',
+        'rating_comment',
     ];
 
     protected function gambar(): Attribute
     {
         return Attribute::make(
-            get: fn ($gambar) => $gambar ? asset('/storage/laporan/' . $gambar) : asset('/images/no-image.png'),
+            get: function ($gambar) {
+                if ($gambar) {
+                    return asset('/storage/laporan/' . $gambar);
+                }
+
+                // Using UI Avatars with the report title for placeholder
+                $title = urlencode($this->judul ?? 'Laporan');
+                return "https://ui-avatars.com/api/?background=random&name=" . $title;
+            }
         );
     }
 
