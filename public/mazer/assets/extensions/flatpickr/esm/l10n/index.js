@@ -53,7 +53,7 @@ import { Burmese as my } from "./my";
 import { Dutch as nl } from "./nl";
 import { NorwegianNynorsk as nn } from "./nn";
 import { Norwegian as no } from "./no";
-import { Punjabi as pa } from "./pa";
+import { Punjaas pa } from "./pa";
 import { Polish as pl } from "./pl";
 import { Portuguese as pt } from "./pt";
 import { Romanian as ro } from "./ro";

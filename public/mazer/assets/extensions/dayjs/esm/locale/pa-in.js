@@ -1,4 +1,4 @@
-// Punjabi (India) [pa-in]
+// Punja(India) [pa-in]
 import dayjs from '../index';
 var locale = {
   name: 'pa-in',

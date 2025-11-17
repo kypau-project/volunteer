@@ -1,4 +1,7 @@
 <div>
+
+    <div wire:loading class="navigation-loading"></div>
+
     <div id="sidebar">
         <div class="sidebar-wrapper active">
             <div class="sidebar-header position-relative">
@@ -35,7 +38,7 @@
                         </svg>
                     </div>
                     <div class="sidebar-toggler  x">
-                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi-x bi-middle"></i></a>
                     </div>
                 </div>
             </div>
@@ -46,75 +49,96 @@
                     <li class="sidebar-title">Menu</li>
 
                     @if(Auth::check() && Auth::user()->role === 'admin')
-                    <li
-                        class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('admin.dashboard') }}" class='sidebar-link' wire:navigate>
+                    <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('admin.dashboard') }}" wire:loading.class="navigating">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">
-                        <a href="{{ route('admin.laporan') }}" class='sidebar-link' wire:navigate>
-                            <i class="bi bi-stack"></i>
-                            <span>Laporan</span>
+                    <li class="sidebar-item {{ request()->routeIs('admin.events.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('admin.events.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-calendar-event"></i>
+                            <span>Events</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{ request()->routeIs('admin.list-user') ? 'active' : '' }}">
-                        <a href="{{ route('admin.list-user') }}" class='sidebar-link' wire:navigate>
-                            <i class="bi bi-person-lines-fill"></i>
+                    <li class="sidebar-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('admin.users.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-people"></i>
                             <span>Users</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-title">Akun</li>
-
-                    <li
-                        class="sidebar-item {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
-                        <a href="{{ route('admin.profile') }}" wire:navigate class='sidebar-link'>
-                            <i class="bi bi-person"></i>
-                            <span>{{ Auth::user()->name }}</span>
+                    <li class="sidebar-item {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="#" wire:loading.class="navigating">
+                            <i class="bi bi-file-text"></i>
+                            <span>Pengumuman</span>
                         </a>
                     </li>
                     @endif
 
-                    @if(Auth::check() && Auth::user()->role === 'user')
-                    <li
-                        class="sidebar-item {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('user.dashboard') }}" class='sidebar-link' wire:navigate>
+                    @if(Auth::check() && Auth::user()->role === 'coordinator')
+                    <li class="sidebar-item {{ request()->routeIs('coordinator.dashboard') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('coordinator.dashboard') }}" wire:loading.class="navigating">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{ request()->routeIs('user.laporan') || request()->routeIs('user.laporan.create') || request()->routeIs('user.laporan.edit') ? 'active' : '' }}">
-                        <a href="{{ route('user.laporan') }}" class='sidebar-link' wire:navigate>
-                            <i class="bi bi-stack"></i>
-                            <span>Laporan</span>
+                    <li class="sidebar-item {{ request()->routeIs('coordinator.events.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('coordinator.events.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-calendar-event"></i>
+                            <span>Events</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-title">Akun</li>
-
-                    <li
-                        class="sidebar-item {{ request()->routeIs('user.profile') ? 'active' : '' }}">
-                        <a href="{{ route('user.profile') }}" wire:navigate class='sidebar-link'>
-                            <i class="bi bi-person"></i>
-                            <span>{{ Auth::user()->name }}</span>
+                    <li class="sidebar-item {{ request()->routeIs('coordinator.volunteers.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('coordinator.volunteers.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-people"></i>
+                            <span>Daftar Relawan</span>
                         </a>
                     </li>
                     @endif
+
+                    @if(Auth::check() && Auth::user()->role === 'volunteer')
+                    <li class="sidebar-item {{ request()->routeIs('volunteer.dashboard') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('volunteer.dashboard') }}" wire:loading.class="navigating">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ request()->routeIs('volunteer.events.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('volunteer.events.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-calendar-plus"></i>
+                            <span>Available Events</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{ request()->routeIs('volunteer.certificates.*') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route('volunteer.certificates.index') }}" wire:loading.class="navigating">
+                            <i class="bi bi-patch-check"></i>
+                            <span>My Certificates</span>
+                        </a>
+                    </li>
+                    @endif
+
+                    <li class="sidebar-title">Account</li>
+
+                    <li class="sidebar-item {{ request()->routeIs('*.profile') ? 'active' : '' }}">
+                        <a wire:navigate class='sidebar-link' href="{{ route(Auth::user()->role . '.profile') }}" wire:loading.class="navigating">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
 
                     <livewire:auth.logout />
 
                     <!-- <li
                         class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                            <i class="bi-stack"></i>
                             <span>Components</span>
                         </a>
                         <ul class="submenu ">                                

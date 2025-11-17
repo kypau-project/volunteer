@@ -9,24 +9,24 @@
                 </div>
 
                 <h1 class="auth-title">Log in</h1>
-                <p class="auth-subtitle mb-5">Masukkan username, email, atau WhatsApp serta password.</p>
+                <p class="auth-subtitle mb-5">Masukkan email serta password.</p>
 
                 <form wire:submit.prevent="login" novalidate>
                     {{-- ID User field --}}
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <label for="idUser" class="form-label visually-hidden">Username / Email / WhatsApp</label>
+                        <label for="idUser" class="form-label visually-hidden">Email</label>
                         <input
                             wire:model.defer="idUser"
                             type="text"
                             id="idUser"
                             class="form-control form-control-xl @error('idUser') is-invalid @enderror"
-                            placeholder="Username / Email / WhatsApp"
+                            placeholder="Email"
                             autocomplete="username">
                         <div class="form-control-icon">
-                            <i class="bi bi-person"></i>
+                            <i class="bi-person"></i>
                         </div>
                         @error('idUser')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -41,10 +41,10 @@
                             placeholder="Password"
                             autocomplete="current-password">
                         <div class="form-control-icon">
-                            <i class="bi bi-shield-lock"></i>
+                            <i class="bi-shield-lock"></i>
                         </div>
                         @error('password')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 

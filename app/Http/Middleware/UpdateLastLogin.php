@@ -13,9 +13,14 @@ class UpdateLastLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            DB::table('users')
-                ->where('id', Auth::id())
-                ->update(['last_login' => now()]);
+            $user = Auth::user();
+            if (method_exists($user, 'updateLastLogin')) {
+                $user->updateLastLogin();
+            } else {
+                DB::table('users')
+                    ->where('id', Auth::id())
+                    ->update(['last_login_at' => now()]);
+            }
         }
 
         return $next($request);

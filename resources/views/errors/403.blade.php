@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,15 +52,16 @@
                 <div class="row">
                     <div class="col-lg-5 col-12">
                         <div class="coming-soon-content-wrap position-relative z-2">
-                          
+
 
                             <h5 class="text-white">Akses ditolak !</h5>
                             <h1 class="text-white">Anda tidak memiliki hak akses untuk halaman ini.</h1>
                             <div class="action-btns">
-                                <a href="https://tepad.id/" class="btn btn-primary mt-5">Beranda</a>
+                                <a href="{{ url('/') }}" class="btn btn-primary mt-5">Beranda</a>
+                                <livewire:auth.logout />
                             </div>
 
-                           
+
                         </div>
                     </div>
                 </div>
@@ -106,18 +106,17 @@
     <!--main content wrapper end-->
 
 
-		<!--build:js-->
-		<script src="https://tepad.id/assets/quiety/js/vendors/jquery-3.6.0.min.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/vendors/bootstrap.bundle.min.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/vendors/swiper-bundle.min.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/vendors/jquery.magnific-popup.min.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/vendors/parallax.min.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/vendors/aos.js"></script>
-		<script src="https://tepad.id/assets/quiety/js/app.js"></script>
+    <!--build:js-->
+    <script src="https://tepad.id/assets/quiety/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/vendors/swiper-bundle.min.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/vendors/jquery.magnific-popup.min.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/vendors/parallax.min.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/vendors/aos.js"></script>
+    <script src="https://tepad.id/assets/quiety/js/app.js"></script>
 
 
 
-		</body>
+</body>
 
-		</html>
-
+</html>

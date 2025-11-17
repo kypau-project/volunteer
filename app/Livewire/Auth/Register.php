@@ -22,8 +22,8 @@ class Register extends Component
     #[Rule('required|email|unique:users,email')]
     public $email = '';
 
-    #[Rule('required|string|min:10|max:15|unique:users,whatsapp')]
-    public $whatsapp = '';
+    #[Rule('required|regex:/^\+?[0-9]{10,15}$/|unique:users,phone')]
+    public $phone = '';
 
     #[Rule('required|string|min:6')]
     public $password = '';
@@ -36,9 +36,12 @@ class Register extends Component
     {
         $validated = $this->validate([
             'name' => 'required|string|min:3|max:255',
-            'username' => 'required|string|min:3|max:255|unique:users,username',
             'email' => 'required|email|unique:users,email',
-            'whatsapp' => 'required|string|min:10|max:15|unique:users,whatsapp',
+            'phone' => [
+                'required',
+                'regex:/^\+?[0-9]{10,15}$/',
+                'unique:users,phone'
+            ],
             'password' => 'required|string|min:6',
             'password_confirmation' => 'required|string|same:password'
         ], [
@@ -46,19 +49,15 @@ class Register extends Component
             'name.min' => 'Nama lengkap minimal 3 karakter.',
             'name.max' => 'Nama lengkap maksimal 255 karakter.',
 
-            'username.required' => 'Username wajib diisi.',
-            'username.min' => 'Username minimal 3 karakter.',
-            'username.max' => 'Username maksimal 255 karakter.',
-            'username.unique' => 'Username sudah digunakan.',
-
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Email sudah terdaftar.',
 
-            'whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
-            'whatsapp.min' => 'Nomor WhatsApp minimal 10 digit.',
-            'whatsapp.max' => 'Nomor WhatsApp maksimal 15 digit.',
-            'whatsapp.unique' => 'Nomor WhatsApp sudah terdaftar.',
+            'phone.required' => 'Nomor Telepon wajib diisi.',
+            'phone.min' => 'Nomor Telepon minimal 10 digit.',
+            'phone.max' => 'Nomor Telepon maksimal 15 digit.',
+            'phone.unique' => 'Nomor Telepon sudah terdaftar.',
+            'phone.regex' => 'Format Nomor Telepon tidak valid.',
 
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 6 karakter.',
@@ -69,23 +68,15 @@ class Register extends Component
 
         $user = User::create([
             'name' => $validated['name'],
-            'username' => $validated['username'],
             'email' => $validated['email'],
-            'whatsapp' => $validated['whatsapp'],
+            'phone' => $validated['phone'],
             'password' => Hash::make($validated['password']),
-            'role' => 'user'
+            'role' => 'volunteer'
         ]);
 
         $this->reset();
 
         $this->dispatch('showAlert');
-        // return $this->redirect('/auth/start-session', navigate: true);
-
-        // Auth::login($user);
-
-        // session()->flash('message', 'Registrasi berhasil! Selamat datang!');
-
-        // return $this->redirect(route('user.dashboard'), navigate: true);
     }
 
     public function render()

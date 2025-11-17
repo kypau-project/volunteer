@@ -1,9 +1,10 @@
-var fp = typeof window !== "undefined" && window.flatpickr !== undefined
-    ? window.flatpickr
-    : {
-        l10ns: {},
-    };
-export var Punjabi = {
+var fp =
+    typeof window !== "undefined" && window.flatpickr !== undefined
+        ? window.flatpickr
+        : {
+              l10ns: {},
+          };
+export var Punja = {
     weekdays: {
         shorthand: ["ਐਤ", "ਸੋਮ", "ਮੰਗਲ", "ਬੁੱਧ", "ਵੀਰ", "ਸ਼ੁੱਕਰ", "ਸ਼ਨਿੱਚਰ"],
         longhand: [

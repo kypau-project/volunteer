@@ -1,72 +1,157 @@
 <div>
-    <div class="page-heading mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <h3>Daftar User</h3>
-            <button class="btn btn-primary" wire:click="createUser">
-                <i class="bi bi-plus-circle"></i> Tambah User
-            </button>
-        </div>
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
     </div>
+    @endif
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row mb-2">
-                <div class="col-md-4 mb-2">
-                    <input type="text" wire:model.live="search" class="form-control" placeholder="Cari nama/email/username/whatsapp...">
+    @if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    <div class="page-heading">
+        <h3>List User</h3>
+    </div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex gap-3 align-items-center grow">
+                <!-- Search -->
+                <input wire:model.live="search" type="search" class="form-control" placeholder="Search users...">
+
+                <!-- Role Filter -->
+                <select wire:model.live="roleFilter" class="form-select" style="width: auto;">
+                    <option value="">Semua Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="coordinator">Coordinator</option>
+                    <option value="volunteer">Volunteer</option>
+                </select>
+
+                <!-- Status Filter -->
+                <select wire:model.live="statusFilter" class="form-select" style="width: auto;">
+                    <option value="">Semua Status</option>
+                    <option value="active">Active</option>
+                    <option value="blocked">Blocked</option>
+                </select>
+
+                <div class="d-flex gap-2">
+                    <!-- Create Button -->
+                    <button wire:click="create" class="btn btn-primary rounded-circle shadow-sm" style="width: 42px; height: 42px;" title="Add New User">
+                        <i class="bi-plus-lg"></i>
+                    </button>
+
+                    <div class="btn-group shadow-sm">
+                        <!-- Export Button -->
+                        <button wire:click="export" class="btn btn-success px-3" title="Export Users">
+                            <i class="bi-download me-1"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
+                        <!-- Import Button -->
+                        <button onclick="document.getElementById('fileImport').click()" class="btn btn-info px-3" title="Import Users">
+                            <i class="bi-upload me-1"></i>
+                            <span class="d-none d-md-inline">Import</span>
+                        </button>
+                    </div>
+
+                    <!-- File Name Display -->
+                    <div id="fileNameDisplay" class="text-muted small d-none">
+                        <i class="bi-file-earmark-text me-1"></i>
+                        <span id="fileName"></span>
+                        <button type="button" onclick="clearFileSelection()" class="btn btn-link btn-sm text-danger p-0 ms-2" title="Clear selection">
+                            <i class="bi-x-circle"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="col-md-3 mb-2">
-                    <select wire:model.live="filterRole" class="form-select">
-                        <option value="">Semua Role</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
-                </div>
+                <!-- Hidden File Input -->
+                <input type="file" id="fileImport" wire:model.live="importFile" class="d-none" accept=".xlsx,.xls" onchange="handleFileSelect(this)">
+
+                <script>
+                    function handleFileSelect(input) {
+                        const fileNameDisplay = document.getElementById('fileNameDisplay');
+                        const fileNameSpan = document.getElementById('fileName');
+
+                        if (input.files && input.files[0]) {
+                            fileNameSpan.textContent = input.files[0].name;
+                            fileNameDisplay.classList.remove('d-none');
+
+                            // Auto-submit import setelah file dipilih
+                            setTimeout(() => {
+                                document.getElementById('importSubmit').click();
+                            }, 500);
+                        }
+                    }
+
+                    function clearFileSelection() {
+                        const fileInput = document.getElementById('fileImport');
+                        const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+                        fileInput.value = '';
+                        fileNameDisplay.classList.add('d-none');
+
+                        // Trigger Livewire to clear the file
+                        @this.call('resetImportFile');
+                    }
+                </script>
+
+                <button wire:click="import" id="importSubmit" class="d-none"></button>
+                @error('importFile') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
+        </div>
+        <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped align-middle">
+                <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th wire:click="sortBy('name')" style="cursor:pointer">Nama <i class="bi bi-sort-alpha-down"></i></th>
-                            <th wire:click="sortBy('username')" style="cursor:pointer">Username <i class="bi bi-sort-alpha-down"></i></th>
+                            <th>Name</th>
                             <th>Email</th>
-                            <th>WhatsApp</th>
                             <th>Role</th>
-                            <th>Dibuat</th>
-                            <th>Terakhir Login</th>
-                            <th>Laporan</th>
-                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td>{{ ($users->currentPage()-1)*$users->perPage() + $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->whatsapp }}</td>
                             <td>
-                                <span class="badge bg-{{ $user->role === 'admin' ? 'primary' : 'info' }}">{{ $user->role }}</span>
+                                {{ $user->name }}
+                                @if($user->id === auth()->id())
+                                <span class="badge bg-primary ms-1">You</span>
+                                @endif
                             </td>
-                            <td>{{ $user->created_at->setTimezone('Asia/Jakarta')->translatedFormat('d M Y H:i') }}</td>
-                            <td>{{ $user->last_login ? \Carbon\Carbon::parse($user->last_login)->setTimezone('Asia/Jakarta')->translatedFormat('d M Y H:i') : '-' }}</td>
-                            <td>{{ $user->laporans()->count() }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>
                             <td>
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-outline-info btn-sm" wire:click="showUserDetail({{ $user->id }})" title="Detail">
-                                        <i class="bi bi-eye"></i>
+                                @if($user->is_blocked)
+                                <span class="badge bg-danger">Blocked</span>
+                                @else
+                                <span class="badge bg-success">Active</span>
+                                @endif
+                            </td>
+                            <td>{{ $user->last_login_at ? $user->last_login_at->diffForHumans() : 'Never' }}</td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <button wire:click="view({{ $user->id }})" class="btn btn-sm btn-info">
+                                        <i class="bi-eye"></i>
                                     </button>
-                                    @if($user->id !== Auth::id())
-                                    <button class="btn btn-outline-{{ $user->is_blocked ? 'success' : 'warning' }} btn-sm"
-                                        wire:click="confirmToggleBlock({{ $user->id }})"
-                                        title="{{ $user->is_blocked ? 'Aktifkan' : 'Blokir' }}">
-                                        <i class="bi bi-{{ $user->is_blocked ? 'unlock' : 'lock' }}"></i>
+                                    @if($user->id !== auth()->id())
+                                    @if($user->role === 'admin')
+                                    <button wire:click="confirmDelete({{ $user->id }})" class="btn btn-sm btn-danger">
+                                        <i class="bi-trash"></i>
                                     </button>
-                                    <button class="btn btn-outline-danger btn-sm" wire:click="confirmDelete({{ $user->id }})" title="Hapus">
-                                        <i class="bi bi-trash"></i>
+                                    @else
+                                    <button wire:click="edit({{ $user->id }})" class="btn btn-sm btn-primary">
+                                        <i class="bi-pencil"></i>
                                     </button>
+                                    <button wire:click="confirmDelete({{ $user->id }})" class="btn btn-sm btn-danger">
+                                        <i class="bi-trash"></i>
+                                    </button>
+                                    <button wire:click="toggleBlock({{ $user->id }})" class="btn btn-sm {{ $user->is_blocked ? 'btn-success' : 'btn-warning' }}">
+                                        <i class="{{ $user->is_blocked ? 'bi-unlock' : 'bi-lock' }}"></i>
+                                    </button>
+                                    @endif
                                     @endif
                                 </div>
                             </td>
@@ -74,93 +159,132 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="mt-2">
-                    {{ $users->links() }}
-                </div>
             </div>
+            {{ $users->links() }}
         </div>
     </div>
 
-    <!-- Modal Create/Edit User -->
-    <div class="modal {{ $showModal ? 'show' : '' }}" tabindex="-1" role="dialog" @if($showModal) style="display: block;" @else style="display: none;" @endif>
+    <!-- Form Modal -->
+    <div class="modal @if($showModal) show @endif" tabindex="-1" role="dialog" style="display: @if($showModal) block @else none @endif;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $isEdit ? 'Edit User' : 'Tambah User Baru' }}</h5>
-                    <button type="button" class="btn-close" wire:click="closeModal"></button>
+                    <h5 class="modal-title">
+                        @if($modalType == 'create')
+                        Create New User
+                        @elseif($modalType == 'edit')
+                        Edit User
+                        @else
+                        View User Details
+                        @endif
+                    </h5>
+                    <button wire:click="$set('showModal', false)" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit="saveUser">
-                        <div class="mb-3">
-                            <label class="form-label">Foto Profil</label>
-                            <input type="file" class="form-control" wire:model="photo" accept="image/*">
-                            @if($photo && $photo instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
-                            <img src="{{ $photo->temporaryUrl() }}" class="mt-2 rounded" style="max-width: 200px">
-                            @elseif($isEdit && $userId)
-                            @php
-                            $user = \App\Models\User::find($userId);
-                            @endphp
-                            <img src="{{ $user ? $user->getAvatarUrl() : '' }}" class="mt-2 rounded" style="max-width: 200px">
+                    @if($modalType == 'view')
+                    <div class="d-flex gap-3 align-items-start">
+                        <div class="flex-shrink-0" style="width:120px;">
+                            @if($photo)
+                            <div class="position-relative" style="width:120px;height:120px;">
+                                <img src="{{ asset('storage/users/' . $photo) }}" alt="Profile Photo" class="rounded position-absolute top-0 start-0 w-100 h-100" style="object-fit:cover;">
+                            </div>
+                            @else
+                            <div class="position-relative" style="width:120px;height:120px;">
+                                <img src="https://ui-avatars.com/api/?background=random&name={{ urlencode($name) }}" alt="Avatar" class="rounded position-absolute top-0 start-0 w-100 h-100" style="object-fit:cover;">
+                            </div>
                             @endif
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Nama</label>
-                            <input type="text" class="form-control" wire:model="name" required>
-                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="grow overflow-hidden">
+                            <h5 class="mb-1 text-break">{{ $name ?? '-' }}</h5>
+                            <div class="mb-1"><strong>Email:</strong> <span class="text-break">{{ $email ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Phone:</strong> <span class="text-break">{{ $phone ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Role:</strong> <span class="text-break">{{ $role ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Address:</strong> <span class="text-break">{{ $address ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Birth Date:</strong> <span class="text-break">{{ $birth_date ? \Carbon\Carbon::parse($birth_date)->format('d M Y') : '-' }}</span></div>
+                            <div class="mb-1"><strong>Gender:</strong> <span class="text-break">{{ $gender ? ($gender === 'male' ? 'Laki-laki' : 'Perempuan') : '-' }}</span></div>
+                            <div class="mb-1"><strong>Education:</strong> <span class="text-break">{{ $education ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Institution:</strong> <span class="text-break">{{ $institution ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Skills:</strong> <span class="text-break">{{ $skills ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Experience:</strong> <span class="text-break">{{ $experience ?? '-' }}</span></div>
+                            <div class="mb-1"><strong>Total Hours:</strong> <span class="text-break">{{ $total_hours ?? '0' }}</span></div>
+                            <div class="mb-1"><strong>Created:</strong> <span class="text-break">{{ $created_at ? $created_at->format('d M Y H:i') : '-' }}</span></div>
+                            <div class="mb-0"><strong>Last Login:</strong> <span class="text-break">{{ $last_login_at ? $last_login_at->diffForHumans() : 'Never' }}</span></div>
                         </div>
-
+                    </div>
+                    @else
+                    <form>
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" wire:model="email" required>
-                            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                id="name" wire:model="name" @if($modalType=='view' ) disabled @endif>
+                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
-
                         <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" wire:model="username" required>
-                            @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email" wire:model="email" @if($modalType=='view' ) disabled @endif>
+                            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
-
+                        @if($modalType != 'view')
                         <div class="mb-3">
-                            <label class="form-label">{{ $isEdit ? 'Password (kosongkan jika tidak ingin mengubah)' : 'Password' }}</label>
-                            <input type="password" class="form-control" wire:model="password" {{ $isEdit ? '' : 'required' }}>
-                            @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="password" class="form-label">
+                                Password @if($modalType == 'edit') (Leave blank to keep current) @endif
+                            </label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password" wire:model="password">
+                            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
-
+                        @endif
                         <div class="mb-3">
-                            <label class="form-label">WhatsApp</label>
-                            <input type="text" class="form-control" wire:model="whatsapp" required>
-                            @error('whatsapp') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Alamat</label>
-                            <textarea class="form-control" wire:model="alamat" required></textarea>
-                            @error('alamat') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Role</label>
-                            <select class="form-select" wire:model="role" required>
-                                <option value="">Pilih Role</option>
+                            <label for="role" class="form-label">Role</label>
+                            <select class="form-select @error('role') is-invalid @enderror"
+                                id="role" wire:model="role" @if($modalType=='view' ) disabled @endif>
+                                <option value="">Select Role</option>
                                 <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                                <option value="coordinator">Coordinator</option>
+                                <option value="volunteer">Volunteer</option>
                             </select>
-                            @error('role') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                     </form>
+                    @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" wire:click="closeModal">Tutup</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveUser">
-                        {{ $isEdit ? 'Update' : 'Simpan' }}
+                    <button type="button" class="btn btn-secondary" wire:click="$set('showModal', false)">
+                        Close
                     </button>
+                    @if($modalType != 'view')
+                    <button type="button" class="btn btn-primary"
+                        wire:click="{{ $modalType == 'create' ? 'store' : 'update' }}">
+                        {{ $modalType == 'create' ? 'Create' : 'Update' }}
+                    </button>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-    @if($showModal)
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal @if($isDelete) show @endif" tabindex="-1" role="dialog" style="display: @if($isDelete) block @else none @endif;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete User</h5>
+                    <button wire:click="$set('isDelete', false)" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this user? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click="$set('isDelete', false)">Cancel</button>
+                    <button type="button" class="btn btn-danger" wire:click="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Backdrop -->
+    @if($showModal || $isDelete)
     <div class="modal-backdrop fade show"></div>
     @endif
 </div>

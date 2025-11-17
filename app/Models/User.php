@@ -3,38 +3,39 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasLastLogin;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasLastLogin;
+    use HasApiTokens, HasFactory, Notifiable, HasLastLogin;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
-        'whatsapp',
-        'photo',
-        'alamat',
         'password',
+        'phone',
         'role',
-        'last_login',
+        'photo',
+        'last_login_at',
+        'is_blocked',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -42,44 +43,106 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'last_login_at' => 'datetime',
+    ];
+
+    // Relations
+
+    /**
+     * Get the volunteer profile associated with the user.
+     */
+    public function profile(): HasOne
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'last_login' => 'datetime',
-        ];
+        return $this->hasOne(VolunteerProfile::class);
     }
 
-    public function laporans()
+    /**
+     * Get the events created by the user (if coordinator/admin).
+     */
+    public function createdEvents(): HasMany
     {
-        return $this->hasMany(Laporan::class);
+        return $this->hasMany(Event::class, 'created_by');
     }
 
-    public function getAvatarUrl()
+    /**
+     * Get the registrations for the user.
+     */
+    public function registrations(): HasMany
     {
-        if ($this->photo) {
-            return Storage::url('users/' . $this->photo);
+        return $this->hasMany(Registration::class);
+    }
+
+    /**
+     * Get the attendances verified by the user (if coordinator/admin).
+     */
+    public function verifiedAttendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'verified_by');
+    }
+
+    // Accessors
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isCoordinator(): bool
+    {
+        return $this->role === 'coordinator' || $this->isAdmin();
+    }
+
+    public function isVolunteer(): bool
+    {
+        return $this->role === 'volunteer';
+    }
+
+    /**
+     * Check if the volunteer profile is complete.
+     * Required fields: name, email, phone, photo, address, birth_date, gender, education, institution, and skills
+     */
+    public function hasCompleteProfile(): bool
+    {
+        // Basic user fields
+        if (empty($this->name) || empty($this->email) || empty($this->phone)) {
+            return false;
         }
 
-        $name = urlencode($this->name);
-        return "https://ui-avatars.com/api/?background=random&name={$name}";
+        // Require a profile record
+        if (!$this->relationLoaded('profile')) {
+            $this->load('profile');
+        }
+
+        $profile = $this->profile;
+
+        if (!$profile) {
+            return false;
+        }
+
+        // Check all required profile fields
+        if (
+            empty(trim((string) $profile->address)) ||
+            empty($profile->birth_date) ||
+            empty($profile->gender) ||
+            empty($profile->education) ||
+            empty(trim((string) $profile->institution)) ||
+            empty(trim((string) $profile->skills))
+        ) {
+            return false;
+        }
+
+        // Photo (profile picture)
+        if (empty($this->photo)) {
+            return false;
+        }
+
+        return true;
     }
-
-    // protected static function booted()
-    // {
-    //     static::created(function ($user) {
-    //         if (empty($user->username)){
-    //             $base = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '', $user->name));
-    //             $username = $base . mt_rand(1, 999);
-    //         }
-    //         $user->username = $username;
-    //         $user->save();
-    //     });
-    // }
-
 }

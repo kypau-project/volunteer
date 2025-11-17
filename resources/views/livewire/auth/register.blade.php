@@ -35,7 +35,7 @@
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input type="text" wire:model.blur="name" class="form-control form-control-xl @error('name') is-invalid @enderror" placeholder="Nama Lengkap">
                         <div class="form-control-icon">
-                            <i class="bi bi-person"></i>
+                            <i class="bi-person"></i>
                         </div>
                         @error('name')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -43,33 +43,25 @@
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="text" wire:model.blur="username" class="form-control form-control-xl @error('username') is-invalid @enderror" placeholder="Username">
-                        <div class="form-control-icon">
-                            <i class="bi bi-person-badge"></i>
-                        </div>
-                        @error('username') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
-                    <div class="form-group position-relative has-icon-left mb-4">
                         <input type="email" wire:model.blur="email" class="form-control form-control-xl @error('email') is-invalid @enderror" placeholder="Email">
                         <div class="form-control-icon">
-                            <i class="bi bi-envelope"></i>
+                            <i class="bi-envelope"></i>
                         </div>
                         @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="text" wire:model.blur="whatsapp" class="form-control form-control-xl @error('whatsapp') is-invalid @enderror" placeholder="Nomor WhatsApp">
+                        <input type="text" wire:model.blur="phone" class="form-control form-control-xl @error('phone') is-invalid @enderror" placeholder="Nomor Telepon">
                         <div class="form-control-icon">
-                            <i class="bi bi-whatsapp"></i>
+                            <i class="bi-whatsapp"></i>
                         </div>
-                        @error('whatsapp') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input type="password" wire:model.blur="password" class="form-control form-control-xl @error('password') is-invalid @enderror" placeholder="Password">
                         <div class="form-control-icon">
-                            <i class="bi bi-shield-lock"></i>
+                            <i class="bi-shield-lock"></i>
                         </div>
                         @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
@@ -77,7 +69,7 @@
                     <div class="form-group position-relative has-icon-left mb-4">
                         <input type="password" wire:model.blur="password_confirmation" class="form-control form-control-xl @error('password_confirmation') is-invalid @enderror" placeholder="Konfirmasi Password">
                         <div class="form-control-icon">
-                            <i class="bi bi-shield-lock"></i>
+                            <i class="bi-shield-lock"></i>
                         </div>
                         @error('password_confirmation') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>

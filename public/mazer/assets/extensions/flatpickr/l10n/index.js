@@ -1,8 +1,13 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.index = {}));
-}(this, (function (exports) { 'use strict';
+    typeof exports === "object" && typeof module !== "undefined"
+        ? factory(exports)
+        : typeof define === "function" && define.amd
+        ? define(["exports"], factory)
+        : ((global =
+              typeof globalThis !== "undefined" ? globalThis : global || self),
+          factory((global.index = {})));
+})(this, function (exports) {
+    "use strict";
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -19,25 +24,38 @@
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
 
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
+    var __assign = function () {
+        __assign =
+            Object.assign ||
+            function __assign(t) {
+                for (var s, i = 1, n = arguments.length; i < n; i++) {
+                    s = arguments[i];
+                    for (var p in s)
+                        if (Object.prototype.hasOwnProperty.call(s, p))
+                            t[p] = s[p];
+                }
+                return t;
+            };
         return __assign.apply(this, arguments);
     };
 
-    var fp = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Arabic = {
         weekdays: {
-            shorthand: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"],
+            shorthand: [
+                "أحد",
+                "اثنين",
+                "ثلاثاء",
+                "أربعاء",
+                "خميس",
+                "جمعة",
+                "سبت",
+            ],
             longhand: [
                 "الأحد",
                 "الاثنين",
@@ -49,7 +67,20 @@
             ],
         },
         months: {
-            shorthand: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+            shorthand: [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+            ],
             longhand: [
                 "يناير",
                 "فبراير",
@@ -80,11 +111,12 @@
     fp.l10ns.ar = Arabic;
     fp.l10ns;
 
-    var fp$1 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$1 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Austria = {
         weekdays: {
             shorthand: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
@@ -138,11 +170,12 @@
     fp$1.l10ns.at = Austria;
     fp$1.l10ns;
 
-    var fp$2 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$2 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Azerbaijan = {
         weekdays: {
             shorthand: ["B.", "B.e.", "Ç.a.", "Ç.", "C.a.", "C.", "Ş."],
@@ -200,11 +233,12 @@
     fp$2.l10ns.az = Azerbaijan;
     fp$2.l10ns;
 
-    var fp$3 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$3 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Belarusian = {
         weekdays: {
             shorthand: ["Нд", "Пн", "Аў", "Ср", "Чц", "Пт", "Сб"],
@@ -263,11 +297,12 @@
     fp$3.l10ns.be = Belarusian;
     fp$3.l10ns;
 
-    var fp$4 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$4 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Bosnian = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -317,11 +352,12 @@
     fp$4.l10ns.bs = Bosnian;
     fp$4.l10ns;
 
-    var fp$5 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$5 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Bulgarian = {
         weekdays: {
             shorthand: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
@@ -371,14 +407,23 @@
     fp$5.l10ns.bg = Bulgarian;
     fp$5.l10ns;
 
-    var fp$6 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$6 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Bangla = {
         weekdays: {
-            shorthand: ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহস্পতি", "শুক্র", "শনি"],
+            shorthand: [
+                "রবি",
+                "সোম",
+                "মঙ্গল",
+                "বুধ",
+                "বৃহস্পতি",
+                "শুক্র",
+                "শনি",
+            ],
             longhand: [
                 "রবিবার",
                 "সোমবার",
@@ -423,11 +468,12 @@
     fp$6.l10ns.bn = Bangla;
     fp$6.l10ns;
 
-    var fp$7 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$7 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Catalan = {
         weekdays: {
             shorthand: ["Dg", "Dl", "Dt", "Dc", "Dj", "Dv", "Ds"],
@@ -473,8 +519,7 @@
         },
         ordinal: function (nth) {
             var s = nth % 100;
-            if (s > 3 && s < 21)
-                return "è";
+            if (s > 3 && s < 21) return "è";
             switch (s % 10) {
                 case 1:
                     return "r";
@@ -495,11 +540,12 @@
     fp$7.l10ns.cat = fp$7.l10ns.ca = Catalan;
     fp$7.l10ns;
 
-    var fp$8 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$8 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Kurdish = {
         weekdays: {
             shorthand: [
@@ -559,11 +605,12 @@
     fp$8.l10ns.ckb = Kurdish;
     fp$8.l10ns;
 
-    var fp$9 = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$9 =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Czech = {
         weekdays: {
             shorthand: ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"],
@@ -622,11 +669,12 @@
     fp$9.l10ns.cs = Czech;
     fp$9.l10ns;
 
-    var fp$a = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$a =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Welsh = {
         weekdays: {
             shorthand: ["Sul", "Llun", "Maw", "Mer", "Iau", "Gwe", "Sad"],
@@ -672,29 +720,28 @@
         },
         firstDayOfWeek: 1,
         ordinal: function (nth) {
-            if (nth === 1)
-                return "af";
-            if (nth === 2)
-                return "ail";
-            if (nth === 3 || nth === 4)
-                return "ydd";
-            if (nth === 5 || nth === 6)
-                return "ed";
-            if ((nth >= 7 && nth <= 10) ||
+            if (nth === 1) return "af";
+            if (nth === 2) return "ail";
+            if (nth === 3 || nth === 4) return "ydd";
+            if (nth === 5 || nth === 6) return "ed";
+            if (
+                (nth >= 7 && nth <= 10) ||
                 nth == 12 ||
                 nth == 15 ||
                 nth == 18 ||
-                nth == 20)
+                nth == 20
+            )
                 return "fed";
-            if (nth == 11 ||
+            if (
+                nth == 11 ||
                 nth == 13 ||
                 nth == 14 ||
                 nth == 16 ||
                 nth == 17 ||
-                nth == 19)
+                nth == 19
+            )
                 return "eg";
-            if (nth >= 21 && nth <= 39)
-                return "ain";
+            if (nth >= 21 && nth <= 39) return "ain";
             // Inconclusive.
             return "";
         },
@@ -703,11 +750,12 @@
     fp$a.l10ns.cy = Welsh;
     fp$a.l10ns;
 
-    var fp$b = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$b =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Danish = {
         weekdays: {
             shorthand: ["søn", "man", "tir", "ons", "tors", "fre", "lør"],
@@ -762,11 +810,12 @@
     fp$b.l10ns.da = Danish;
     fp$b.l10ns;
 
-    var fp$c = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$c =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var German = {
         weekdays: {
             shorthand: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
@@ -867,8 +916,7 @@
         firstDayOfWeek: 0,
         ordinal: function (nth) {
             var s = nth % 100;
-            if (s > 3 && s < 21)
-                return "th";
+            if (s > 3 && s < 21) return "th";
             switch (s % 10) {
                 case 1:
                     return "st";
@@ -892,11 +940,12 @@
         time_24hr: false,
     };
 
-    var fp$d = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$d =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Esperanto = {
         firstDayOfWeek: 1,
         rangeSeparator: " ĝis ",
@@ -953,11 +1002,12 @@
     fp$d.l10ns.eo = Esperanto;
     fp$d.l10ns;
 
-    var fp$e = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$e =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Spanish = {
         weekdays: {
             shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
@@ -1011,11 +1061,12 @@
     fp$e.l10ns.es = Spanish;
     fp$e.l10ns;
 
-    var fp$f = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$f =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Estonian = {
         weekdays: {
             shorthand: ["P", "E", "T", "K", "N", "R", "L"],
@@ -1072,11 +1123,12 @@
     fp$f.l10ns.et = Estonian;
     fp$f.l10ns;
 
-    var fp$g = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$g =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Persian = {
         weekdays: {
             shorthand: ["یک", "دو", "سه", "چهار", "پنج", "جمعه", "شنبه"],
@@ -1128,11 +1180,12 @@
     fp$g.l10ns.fa = Persian;
     fp$g.l10ns;
 
-    var fp$h = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$h =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Finnish = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -1185,11 +1238,12 @@
     fp$h.l10ns.fi = Finnish;
     fp$h.l10ns;
 
-    var fp$i = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$i =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Faroese = {
         weekdays: {
             shorthand: ["Sun", "Mán", "Týs", "Mik", "Hós", "Frí", "Ley"],
@@ -1247,11 +1301,12 @@
     fp$i.l10ns.fo = Faroese;
     fp$i.l10ns;
 
-    var fp$j = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$j =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var French = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -1297,8 +1352,7 @@
             ],
         },
         ordinal: function (nth) {
-            if (nth > 1)
-                return "";
+            if (nth > 1) return "";
             return "er";
         },
         rangeSeparator: " au ",
@@ -1310,11 +1364,12 @@
     fp$j.l10ns.fr = French;
     fp$j.l10ns;
 
-    var fp$k = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$k =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Greek = {
         weekdays: {
             shorthand: ["Κυ", "Δε", "Τρ", "Τε", "Πέ", "Πα", "Σά"],
@@ -1375,15 +1430,24 @@
     fp$k.l10ns.gr = Greek;
     fp$k.l10ns;
 
-    var fp$l = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$l =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Hebrew = {
         weekdays: {
             shorthand: ["א", "ב", "ג", "ד", "ה", "ו", "ש"],
-            longhand: ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"],
+            longhand: [
+                "ראשון",
+                "שני",
+                "שלישי",
+                "רביעי",
+                "חמישי",
+                "שישי",
+                "שבת",
+            ],
         },
         months: {
             shorthand: [
@@ -1421,11 +1485,12 @@
     fp$l.l10ns.he = Hebrew;
     fp$l.l10ns;
 
-    var fp$m = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$m =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Hindi = {
         weekdays: {
             shorthand: ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"],
@@ -1473,11 +1538,12 @@
     fp$m.l10ns.hi = Hindi;
     fp$m.l10ns;
 
-    var fp$n = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$n =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Croatian = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -1527,11 +1593,12 @@
     fp$n.l10ns.hr = Croatian;
     fp$n.l10ns;
 
-    var fp$o = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$o =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Hungarian = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -1588,11 +1655,12 @@
     fp$o.l10ns.hu = Hungarian;
     fp$o.l10ns;
 
-    var fp$p = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$p =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Armenian = {
         weekdays: {
             shorthand: ["Կիր", "Երկ", "Երք", "Չրք", "Հնգ", "Ուրբ", "Շբթ"],
@@ -1654,15 +1722,24 @@
     fp$p.l10ns.hy = Armenian;
     fp$p.l10ns;
 
-    var fp$q = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$q =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Indonesian = {
         weekdays: {
             shorthand: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
-            longhand: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
+            longhand: [
+                "Minggu",
+                "Senin",
+                "Selasa",
+                "Rabu",
+                "Kamis",
+                "Jumat",
+                "Sabtu",
+            ],
         },
         months: {
             shorthand: [
@@ -1704,11 +1781,12 @@
     fp$q.l10ns.id = Indonesian;
     fp$q.l10ns;
 
-    var fp$r = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$r =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Icelandic = {
         weekdays: {
             shorthand: ["Sun", "Mán", "Þri", "Mið", "Fim", "Fös", "Lau"],
@@ -1764,11 +1842,12 @@
     fp$r.l10ns.is = Icelandic;
     fp$r.l10ns;
 
-    var fp$s = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$s =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Italian = {
         weekdays: {
             shorthand: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
@@ -1813,7 +1892,9 @@
             ],
         },
         firstDayOfWeek: 1,
-        ordinal: function () { return "°"; },
+        ordinal: function () {
+            return "°";
+        },
         rangeSeparator: " al ",
         weekAbbreviation: "Se",
         scrollTitle: "Scrolla per aumentare",
@@ -1823,11 +1904,12 @@
     fp$s.l10ns.it = Italian;
     fp$s.l10ns;
 
-    var fp$t = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$t =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Japanese = {
         weekdays: {
             shorthand: ["日", "月", "火", "水", "木", "金", "土"],
@@ -1882,11 +1964,12 @@
     fp$t.l10ns.ja = Japanese;
     fp$t.l10ns;
 
-    var fp$u = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$u =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Georgian = {
         weekdays: {
             shorthand: ["კვ", "ორ", "სა", "ოთ", "ხუ", "პა", "შა"],
@@ -1945,11 +2028,12 @@
     fp$u.l10ns.ka = Georgian;
     fp$u.l10ns;
 
-    var fp$v = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$v =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Korean = {
         weekdays: {
             shorthand: ["일", "월", "화", "수", "목", "금", "토"],
@@ -2002,14 +2086,23 @@
     fp$v.l10ns.ko = Korean;
     fp$v.l10ns;
 
-    var fp$w = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$w =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Khmer = {
         weekdays: {
-            shorthand: ["អាទិត្យ", "ចន្ទ", "អង្គារ", "ពុធ", "ព្រហស.", "សុក្រ", "សៅរ៍"],
+            shorthand: [
+                "អាទិត្យ",
+                "ចន្ទ",
+                "អង្គារ",
+                "ពុធ",
+                "ព្រហស.",
+                "សុក្រ",
+                "សៅរ៍",
+            ],
             longhand: [
                 "អាទិត្យ",
                 "ចន្ទ",
@@ -2064,11 +2157,12 @@
     fp$w.l10ns.km = Khmer;
     fp$w.l10ns;
 
-    var fp$x = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$x =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Kazakh = {
         weekdays: {
             shorthand: ["Жс", "Дс", "Сc", "Ср", "Бс", "Жм", "Сб"],
@@ -2126,11 +2220,12 @@
     fp$x.l10ns.kz = Kazakh;
     fp$x.l10ns;
 
-    var fp$y = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$y =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Lithuanian = {
         weekdays: {
             shorthand: ["S", "Pr", "A", "T", "K", "Pn", "Š"],
@@ -2187,11 +2282,12 @@
     fp$y.l10ns.lt = Lithuanian;
     fp$y.l10ns;
 
-    var fp$z = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$z =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Latvian = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -2242,11 +2338,12 @@
     fp$z.l10ns.lv = Latvian;
     fp$z.l10ns;
 
-    var fp$A = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$A =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Macedonian = {
         weekdays: {
             shorthand: ["Не", "По", "Вт", "Ср", "Че", "Пе", "Са"],
@@ -2298,16 +2395,25 @@
     fp$A.l10ns.mk = Macedonian;
     fp$A.l10ns;
 
-    var fp$B = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$B =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Mongolian = {
         firstDayOfWeek: 1,
         weekdays: {
             shorthand: ["Да", "Мя", "Лх", "Пү", "Ба", "Бя", "Ня"],
-            longhand: ["Даваа", "Мягмар", "Лхагва", "Пүрэв", "Баасан", "Бямба", "Ням"],
+            longhand: [
+                "Даваа",
+                "Мягмар",
+                "Лхагва",
+                "Пүрэв",
+                "Баасан",
+                "Бямба",
+                "Ням",
+            ],
         },
         months: {
             shorthand: [
@@ -2345,15 +2451,24 @@
     fp$B.l10ns.mn = Mongolian;
     fp$B.l10ns;
 
-    var fp$C = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$C =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Malaysian = {
         weekdays: {
             shorthand: ["Aha", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"],
-            longhand: ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"],
+            longhand: [
+                "Ahad",
+                "Isnin",
+                "Selasa",
+                "Rabu",
+                "Khamis",
+                "Jumaat",
+                "Sabtu",
+            ],
         },
         months: {
             shorthand: [
@@ -2392,11 +2507,12 @@
     };
     fp$C.l10ns;
 
-    var fp$D = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$D =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Burmese = {
         weekdays: {
             shorthand: ["နွေ", "လာ", "ဂါ", "ဟူး", "ကြာ", "သော", "နေ"],
@@ -2449,11 +2565,12 @@
     fp$D.l10ns.my = Burmese;
     fp$D.l10ns;
 
-    var fp$E = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$E =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Dutch = {
         weekdays: {
             shorthand: ["zo", "ma", "di", "wo", "do", "vr", "za"],
@@ -2504,19 +2621,19 @@
         toggleTitle: "Klik om te wisselen",
         time_24hr: true,
         ordinal: function (nth) {
-            if (nth === 1 || nth === 8 || nth >= 20)
-                return "ste";
+            if (nth === 1 || nth === 8 || nth >= 20) return "ste";
             return "de";
         },
     };
     fp$E.l10ns.nl = Dutch;
     fp$E.l10ns;
 
-    var fp$F = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$F =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var NorwegianNynorsk = {
         weekdays: {
             shorthand: ["Sø.", "Må.", "Ty.", "On.", "To.", "Fr.", "La."],
@@ -2573,11 +2690,12 @@
     fp$F.l10ns.nn = NorwegianNynorsk;
     fp$F.l10ns;
 
-    var fp$G = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$G =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Norwegian = {
         weekdays: {
             shorthand: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
@@ -2634,14 +2752,23 @@
     fp$G.l10ns.no = Norwegian;
     fp$G.l10ns;
 
-    var fp$H = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
-    var Punjabi = {
+    var fp$H =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
+    var Punja = {
         weekdays: {
-            shorthand: ["ਐਤ", "ਸੋਮ", "ਮੰਗਲ", "ਬੁੱਧ", "ਵੀਰ", "ਸ਼ੁੱਕਰ", "ਸ਼ਨਿੱਚਰ"],
+            shorthand: [
+                "ਐਤ",
+                "ਸੋਮ",
+                "ਮੰਗਲ",
+                "ਬੁੱਧ",
+                "ਵੀਰ",
+                "ਸ਼ੁੱਕਰ",
+                "ਸ਼ਨਿੱਚਰ",
+            ],
             longhand: [
                 "ਐਤਵਾਰ",
                 "ਸੋਮਵਾਰ",
@@ -2687,11 +2814,12 @@
     fp$H.l10ns.pa = Punjabi;
     fp$H.l10ns;
 
-    var fp$I = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$I =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Polish = {
         weekdays: {
             shorthand: ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"],
@@ -2748,11 +2876,12 @@
     fp$I.l10ns.pl = Polish;
     fp$I.l10ns;
 
-    var fp$J = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$J =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Portuguese = {
         weekdays: {
             shorthand: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
@@ -2802,11 +2931,12 @@
     fp$J.l10ns.pt = Portuguese;
     fp$J.l10ns;
 
-    var fp$K = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$K =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Romanian = {
         weekdays: {
             shorthand: ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sâm"],
@@ -2859,11 +2989,12 @@
     fp$K.l10ns.ro = Romanian;
     fp$K.l10ns;
 
-    var fp$L = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$L =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Russian = {
         weekdays: {
             shorthand: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
@@ -2922,11 +3053,12 @@
     fp$L.l10ns.ru = Russian;
     fp$L.l10ns;
 
-    var fp$M = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$M =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Sinhala = {
         weekdays: {
             shorthand: ["ඉ", "ස", "අ", "බ", "බ්‍ර", "සි", "සෙ"],
@@ -2975,11 +3107,12 @@
     fp$M.l10ns.si = Sinhala;
     fp$M.l10ns;
 
-    var fp$N = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$N =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Slovak = {
         weekdays: {
             shorthand: ["Ned", "Pon", "Ut", "Str", "Štv", "Pia", "Sob"],
@@ -3033,11 +3166,12 @@
     fp$N.l10ns.sk = Slovak;
     fp$N.l10ns;
 
-    var fp$O = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$O =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Slovenian = {
         weekdays: {
             shorthand: ["Ned", "Pon", "Tor", "Sre", "Čet", "Pet", "Sob"],
@@ -3091,11 +3225,12 @@
     fp$O.l10ns.sl = Slovenian;
     fp$O.l10ns;
 
-    var fp$P = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$P =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Albanian = {
         weekdays: {
             shorthand: ["Di", "Hë", "Ma", "Më", "En", "Pr", "Sh"],
@@ -3151,11 +3286,12 @@
     fp$P.l10ns.sq = Albanian;
     fp$P.l10ns;
 
-    var fp$Q = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$Q =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Serbian = {
         weekdays: {
             shorthand: ["Ned", "Pon", "Uto", "Sre", "Čet", "Pet", "Sub"],
@@ -3207,11 +3343,12 @@
     fp$Q.l10ns.sr = Serbian;
     fp$Q.l10ns;
 
-    var fp$R = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$R =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Swedish = {
         firstDayOfWeek: 1,
         weekAbbreviation: "v",
@@ -3266,11 +3403,12 @@
     fp$R.l10ns.sv = Swedish;
     fp$R.l10ns;
 
-    var fp$S = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$S =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Thai = {
         weekdays: {
             shorthand: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"],
@@ -3326,11 +3464,12 @@
     fp$S.l10ns.th = Thai;
     fp$S.l10ns;
 
-    var fp$T = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$T =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Turkish = {
         weekdays: {
             shorthand: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
@@ -3388,11 +3527,12 @@
     fp$T.l10ns.tr = Turkish;
     fp$T.l10ns;
 
-    var fp$U = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$U =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Ukrainian = {
         firstDayOfWeek: 1,
         weekdays: {
@@ -3442,11 +3582,12 @@
     fp$U.l10ns.uk = Ukrainian;
     fp$U.l10ns;
 
-    var fp$V = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$V =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Uzbek = {
         weekdays: {
             shorthand: ["Якш", "Душ", "Сеш", "Чор", "Пай", "Жум", "Шан"],
@@ -3505,11 +3646,12 @@
     fp$V.l10ns.uz = Uzbek;
     fp$V.l10ns;
 
-    var fp$W = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$W =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var UzbekLatin = {
         weekdays: {
             shorthand: ["Ya", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
@@ -3568,11 +3710,12 @@
     fp$W.l10ns["uz_latn"] = UzbekLatin;
     fp$W.l10ns;
 
-    var fp$X = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$X =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Vietnamese = {
         weekdays: {
             shorthand: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
@@ -3622,11 +3765,12 @@
     fp$X.l10ns.vn = Vietnamese;
     fp$X.l10ns;
 
-    var fp$Y = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$Y =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var Mandarin = {
         weekdays: {
             shorthand: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
@@ -3678,11 +3822,12 @@
     fp$Y.l10ns.zh = Mandarin;
     fp$Y.l10ns;
 
-    var fp$Z = typeof window !== "undefined" && window.flatpickr !== undefined
-        ? window.flatpickr
-        : {
-            l10ns: {},
-        };
+    var fp$Z =
+        typeof window !== "undefined" && window.flatpickr !== undefined
+            ? window.flatpickr
+            : {
+                  l10ns: {},
+              };
     var MandarinTraditional = {
         weekdays: {
             shorthand: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
@@ -3804,6 +3949,5 @@
 
     exports.default = l10n;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+    Object.defineProperty(exports, "__esModule", { value: true });
+});

@@ -25,8 +25,7 @@ class Login extends Component
         $this->validate();
 
         $user = User::where('email', $this->idUser)
-            ->orWhere('username', $this->idUser)
-            ->orWhere('whatsapp', $this->idUser)
+            ->orWhere('phone', $this->idUser)
             ->first();
 
         if (! $user) {
@@ -50,7 +49,16 @@ class Login extends Component
             session()->regenerate();
             // Update last login
             $user->updateLastLogin();
-            return $this->redirectIntended(route('admin.dashboard'), navigate: true);
+
+            // Redirect based on user role
+            $redirectRoute = match ($user->role) {
+                'admin' => route('admin.dashboard'),
+                'coordinator' => route('coordinator.dashboard'),
+                'volunteer' => route('volunteer.dashboard'),
+                default => '/'
+            };
+
+            return $this->redirectIntended($redirectRoute, navigate: true);
         }
 
         $this->addError('password', 'Password salah.');
@@ -60,8 +68,7 @@ class Login extends Component
     {
         return match (true) {
             $user->email === $this->idUser    => 'email',
-            $user->username === $this->idUser => 'username',
-            $user->whatsapp === $this->idUser => 'whatsapp',
+            $user->phone === $this->idUser => 'phone',
             default => 'email',
         };
     }
